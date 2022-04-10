@@ -4,13 +4,16 @@ import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
 function CreateTask({ modal, toggle, save, setModal }) {
   const [taskName, setTaskName] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
+
   const handleSave = () => {
-    let taskObj = {};
-    taskObj["name"] = taskName;
-    taskObj["description"] = taskDescription;
-    save(taskObj);
-    setTaskName("");
-    setTaskDescription("");
+    if (taskName !== "") {
+      let taskObj = {};
+      taskObj["name"] = taskName;
+      taskObj["description"] = taskDescription;
+      save(taskObj);
+      setTaskName("");
+      setTaskDescription("");
+    }
   };
 
   return (
@@ -21,8 +24,9 @@ function CreateTask({ modal, toggle, save, setModal }) {
         <ModalBody>
           <form>
             <div className="form-group">
-              <label>Task Name</label>
+              <label htmlFor="taskName">Task Name</label>
               <input
+                id="taskName"
                 type={"text"}
                 className="form-control"
                 value={taskName}
@@ -32,8 +36,9 @@ function CreateTask({ modal, toggle, save, setModal }) {
               />
             </div>
             <div className="form-group">
-              <label>Description</label>
+              <label htmlFor="taskDescription">Description</label>
               <textarea
+                id="taskDescription"
                 rows={5}
                 className="form-control"
                 value={taskDescription}
